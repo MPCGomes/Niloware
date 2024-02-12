@@ -1,15 +1,14 @@
 .filledButton {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 5rem;
-        height: 1.5rem;
-        border-style: solid;
-        border-width: 2px;
-        border-radius: 50px;
-        margin-left: 0.5rem;
-        border-color: transparent;
-        background-color: #0177b6;
-        color: #f0f0f0;
-    }
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    background-color: #0177b6;
+    color: #f0f0f0;
+    cursor: pointer;
+    font-weight: 600;
+}
