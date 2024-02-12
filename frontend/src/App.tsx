@@ -1,11 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import { ThemeProvider } from './contexts/ThemeContext';
+import ReactDOM from 'react-dom';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
+    <ThemeProvider>
+      <div className="App">
+        <Header />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -18,8 +22,8 @@ function App() {
         >
           Learn React
         </a>
-      </header>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }
 

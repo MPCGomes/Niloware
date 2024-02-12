@@ -1,0 +1,21 @@
+:root {
+        --primary-color: #2f70ca;
+        --secondary-color: #143d76;
+        --accent-color: #1356b4;
+        --background-color: #f3f8fc;
+        --text-color: #04070b;
+}
+
+.hollowButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 5rem;
+        height: 1.5rem;
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 50px;
+        border-color: var(--primary-color);
+        color: var(--text-color);
+        cursor: pointer;
+}

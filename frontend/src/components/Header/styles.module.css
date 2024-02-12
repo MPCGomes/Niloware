@@ -1,0 +1,21 @@
+:root {
+    --primary-color: #2f70ca;
+    --secondary-color: #143d76;
+    --accent-color: #1356b4;
+    --background-color: #f3f8fc;
+    --text-color: #04070b;
+}
+
+.header {
+    display: flex;
+    height: 3rem;
+    align-items: center;
+    background-color: var(--background-color);
+    justify-content: space-between;
+}
+
+.accountButtons {
+    display: flex;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}

@@ -1,0 +1,21 @@
+:root {
+        --primary-color: #2f70ca;
+        --secondary-color: #143d76;
+        --accent-color: #1356b4;
+        --background-color: #f3f8fc;
+        --text-color: #04070b;
+}
+
+.themeButton {
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+}
+
+.themeButton:hover {
+        background-color: #404040;
+}
