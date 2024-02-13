@@ -4,7 +4,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import styles from './styles.module.css';
 
 const ThemeButton: React.FC = () => {
-  const { toggleTheme, theme } = useTheme();
+  const { toggleTheme } = useTheme();
 
   return (
     <div

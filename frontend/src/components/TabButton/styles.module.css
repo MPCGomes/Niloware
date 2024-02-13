@@ -11,5 +11,6 @@
         color: var(--text-color);
         cursor: pointer;
         font-weight: 600;
+        text-decoration: none;
     }
     
