@@ -1,3 +1,9 @@
+:root {
+    --background-color: #f3f8fc;
+    --background-color-opposite: #04070b;
+    --accent-color: #1356b4;
+}
+
 .filledButton {
     display: flex;
     justify-content: center;
@@ -7,7 +13,7 @@
     margin-left: 0.5rem;
     border: 2px solid transparent;
     border-radius: 50px;
-    background-color: #0177b6;
+    background-color: var(--accent-color);
     color: #f0f0f0;
     cursor: pointer;
     font-weight: 600;
