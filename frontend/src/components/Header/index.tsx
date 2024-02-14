@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
     const theme = useSelector((state: RootState) => state.theme.mode);
-    const themeClass = theme === 'light' ? styles.lightTheme : styles.darkTheme;
 
     return (
         <div className={styles.header}>
