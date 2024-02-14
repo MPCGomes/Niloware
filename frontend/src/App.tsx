@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from './components/layout/Header';
 import AppRoutes from './routes/AppRoutes';
 import useApplyTheme from './app/hooks/useApplyTheme';
 
