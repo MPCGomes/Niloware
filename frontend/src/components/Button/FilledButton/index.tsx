@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './styles.module.css';
+import '../../../styles/globals.css';
 
 const FilledButton: React.FC<{ name: string }> = ({ name }) => {
     return (
-        <div className={styles.filledButton}>
+        <button className={styles.filledButton}>
             {name}
-        </div>
+        </button>
     );
 };
 

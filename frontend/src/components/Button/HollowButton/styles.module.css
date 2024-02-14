@@ -1,17 +1,13 @@
-:root {
-        --primary-color: #2f70ca;
-}
-
 .hollowButton {
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 0 1rem;
         height: 1.5rem;
+        background-color: var(--background-color);
         border: 2px solid var(--primary-color);
         border-radius: 50px;
         color: var(--text-color);
         cursor: pointer;
         font-weight: 600;
-    }
-    
+}

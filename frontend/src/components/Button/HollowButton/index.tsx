@@ -3,9 +3,9 @@ import styles from './styles.module.css';
 
 const HollowButton: React.FC<{ name: string }> = ({ name }) => {
     return (
-        <div className={styles.hollowButton}>
+        <button className={styles.hollowButton}>
             {name}
-        </div>
+        </button>
     );
 };
 

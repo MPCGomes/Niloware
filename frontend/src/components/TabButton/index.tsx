@@ -1,19 +1,16 @@
 import React from 'react';
+import Link from 'next/link';
 import styles from './styles.module.css';
-import { Link } from 'react-router-dom';
 
 interface TabButtonProps {
     name: string;
-    to: string;
+    href: string;
 }
 
-const TabButton: React.FC<TabButtonProps> = ({ name, to }) => {
+const TabButton: React.FC<TabButtonProps> = ({ name, href }) => {
     return (
-        <Link
-            className={styles.tabButton}
-            to={to}
-        >
-            {name}
+        <Link className={styles.tabButton} href={href} passHref>
+            <span>{name}</span>
         </Link>
     );
 };

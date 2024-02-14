@@ -10,7 +10,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         <div className="main-layout">
             <Header />
             <main>{children}</main>
-            {/* <Footer />*/}
+            {/* <Footer /> */}
         </div>
     );
 };
