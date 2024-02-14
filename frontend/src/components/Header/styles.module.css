@@ -1,8 +1,3 @@
-:root {
-    --background-color: #f3f8fc;
-    --background-color-opposite: #04070b;
-}
-
 .header {
     display: flex;
     align-items: center;
@@ -14,7 +9,6 @@
     border-left: none; 
     border-right: none;
     border-color: var(--background-color-opposite);
-    
 }
 
 .logo {

@@ -1,14 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
 import HollowButton from '../HollowButton';
 import FilledButton from '../FilledButton';
 import ThemeButton from '../ThemeButton';
 import styles from './styles.module.css';
 import TabButton from '../TabButton';
-import { useTheme } from '../../contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
-    const { theme } = useTheme();
+    const theme = useSelector((state: RootState) => state.theme.mode);
+    const themeClass = theme === 'light' ? styles.lightTheme : styles.darkTheme;
 
     return (
         <div className={styles.header}>
@@ -22,14 +24,8 @@ const Header: React.FC = () => {
                 </Link>
             </div>
             <div className={styles.tabButtons}>
-                <TabButton
-                    to='/RPG'
-                    name='RPG'
-                />
-                <TabButton
-                    to='/TCG'
-                    name='TCG'
-                />
+                <TabButton to='/RPG' name='RPG' />
+                <TabButton to='/TCG' name='TCG' />
             </div>
             <div className={styles.utilityButtons}>
                 <ThemeButton />

@@ -1,18 +1,21 @@
 import React from 'react';
-import { Moon } from 'lucide-react';
-import { useTheme } from '../../contexts/ThemeContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTheme } from '../../features/theme/ThemeSlice';
+import { RootState } from '../../app/store';
 import styles from './styles.module.css';
+import { Moon } from 'lucide-react';
 
 const ThemeButton: React.FC = () => {
-  const { toggleTheme } = useTheme();
+  const dispatch = useDispatch();
+  const theme = useSelector((state: RootState) => state.theme.mode);
 
   return (
     <div
       className={styles.themeButton}
-      onClick={toggleTheme}>
+      onClick={() => dispatch(toggleTheme())}>
       <Moon
         size={20}
-        color="var(--text-color)"
+        color={theme === 'light' ? '#04070b' : '#f4f7fb'}
       />
     </div>
   );

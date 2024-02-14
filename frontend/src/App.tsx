@@ -1,21 +1,20 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header';
-import { ThemeProvider } from './contexts/ThemeContext';
-import { BrowserRouter as Router} from 'react-router-dom';
 import AppRoutes from './routes/AppRoutes';
+import useApplyTheme from './app/hooks/useApplyTheme';
 
 const App: React.FC = () => {
+  useApplyTheme();
+
   return (
-    <ThemeProvider>
-      <Router>
-        <div className="App">
-          <Header />
-          <AppRoutes />
-        </div>
-      </Router>
-    </ThemeProvider>
+    <div className="App">
+      <Header />
+      <main>
+        <AppRoutes />
+      </main>
+    </div>
   );
-}
+};
 
 export default App;
