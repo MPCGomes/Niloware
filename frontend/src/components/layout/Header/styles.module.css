@@ -4,9 +4,9 @@
     justify-content: space-between;
     height: 3rem;
     background-color: var(--background-color);
-    border: 1px solid; 
-    border-top: none; 
-    border-left: none; 
+    border: 1px solid;
+    border-top: none;
+    border-left: none;
     border-right: none;
     border-color: var(--background-color-opposite);
 }

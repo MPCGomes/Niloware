@@ -1,11 +1,12 @@
 import React from 'react';
+import MainLayout from '../components/layout/MainLayout';
 
-const RPG: React.FC = () => (
-    <div>
-        <h2>Teste</h2>
-        <p>Testsadsad.</p>
-    </div>
-
-);
+const RPG: React.FC = () => {
+    return (
+        <MainLayout>
+            <h1>RPG</h1>
+        </MainLayout>
+    );
+};
 
 export default RPG;

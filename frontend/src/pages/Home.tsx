@@ -1,11 +1,12 @@
 import React from 'react';
+import MainLayout from '../components/layout/MainLayout';
 
-const Home: React.FC = () => (
-    <div>
-        <h2>Home</h2>
-        <p>Test.</p>
-    </div>
-
-);
+const Home: React.FC = () => {
+    return (
+        <MainLayout>
+            <h1>Home</h1>
+        </MainLayout>
+    );
+};
 
 export default Home;

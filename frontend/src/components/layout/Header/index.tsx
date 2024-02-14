@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
-import HollowButton from '../HollowButton';
-import FilledButton from '../FilledButton';
-import ThemeButton from '../ThemeButton';
+import { RootState } from '../../../app/store';
+import HollowButton from '../../HollowButton';
+import FilledButton from '../../FilledButton';
+import ThemeButton from '../../ThemeButton';
 import styles from './styles.module.css';
-import TabButton from '../TabButton';
+import TabButton from '../../TabButton';
 import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
