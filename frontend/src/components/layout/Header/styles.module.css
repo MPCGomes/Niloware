@@ -1,38 +1,32 @@
 .header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 3rem;
-    background-color: var(--background-color);
-    border: 1px solid;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-color: var(--background-color-opposite);
-}
-
-.logo {
-    display: flex;
     justify-content: center;
     align-items: center;
-    width: 5rem;
-    height: 1.5rem;
+    height: 80px;
+    background-color: var(--background-color);
+    padding: 0px 32px;
+    width: 100%;
+}
+
+.headerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+}
+.logo {
+    display: flex;
+    width: 100px;
+    height: 32px;
     object-fit: contain;
-    margin-left: 0.5rem;
     cursor: pointer;
 }
 
-.tabButtons {
+.centerContent {
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.authButtons {
+.rightContent {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    flex-direction: row;
 }

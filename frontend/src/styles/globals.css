@@ -28,10 +28,12 @@
   --text-color: #f4f7fb;
 }
 
-html, body {
+body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  background-color: var(--background-color)
 }
 
 h1, h2, h3 {
@@ -40,9 +42,5 @@ h1, h2, h3 {
 
 strong {
   font-weight: 700;
-}
-
-body {
-  font-weight: 400;
 }
 

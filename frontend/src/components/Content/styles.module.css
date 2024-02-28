@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    height: auto;
+    background-color: var(--background-color);
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    background-color: var(--background-color);
+    width: 800px;
+    height: 100%;
+}
+
+.sidebar {
+    background-color: var(--background-color);
+    width: 250px;
+    height: 100px;
+}
+
+.index {
+    background-color: var(--background-color);
+    width: 150px;
+    height: 100px;
+}

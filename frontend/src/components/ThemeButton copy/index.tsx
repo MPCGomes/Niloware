@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles.module.css';
-import { Moon, Sun } from 'lucide-react';
+import { Moon } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { toggleTheme } from '@/features/theme/themeSlice';
 
@@ -10,11 +10,7 @@ const ThemeButton: React.FC = () => {
 
   return (
     <div className={styles.themeButton} onClick={() => dispatch(toggleTheme())}>
-      {theme === 'light' ? (
-        <Sun size={20} color="#04070b" />
-      ) : (
-        <Moon size={20} color="#f4f7fb" />
-      )}
+      <Moon size={20} color={theme === 'light' ? '#04070b' : '#f4f7fb'} />
     </div>
   );
 };

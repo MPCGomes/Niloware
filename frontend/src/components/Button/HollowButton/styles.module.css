@@ -1,9 +1,9 @@
 .hollowButton {
         display: flex;
-        justify-content: center;
         align-items: center;
-        padding: 0 1rem;
-        height: 1.5rem;
+        height: 32px;
+        padding: 8px 16px;
+        margin-left: 6px;
         background-color: var(--background-color);
         border: 2px solid var(--primary-color);
         border-radius: 50px;
