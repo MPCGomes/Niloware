@@ -5,13 +5,13 @@ import '../../styles/globals.css';
 const Content: React.FC = () => {
     return (
         <div className={styles.container}>
-            <div className={styles.sidebar}>
+            <div className={styles.leftContent}>
 
             </div>
-            <div className={styles.content}>
+            <div className={styles.centerContent}>
 
             </div>
-            <div className={styles.index}>
+            <div className={styles.rightContent}>
 
             </div>
         </div>

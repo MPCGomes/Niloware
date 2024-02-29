@@ -1,13 +1,3 @@
-:root {
-  --primary-color: #2f70ca;
-  --secondary-color: #143d76;
-  --accent-color: #1356b4;
-  --background-color: #f3f8fc;
-  --background-color-opposite: #03080c;
-  --hover-color: #ffffff;
-  --text-color: #04070b;
-}
-
 :root.light-theme {
   --primary-color: #2f70ca;
   --secondary-color: #143d76;

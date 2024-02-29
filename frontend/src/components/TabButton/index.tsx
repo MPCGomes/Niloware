@@ -9,8 +9,13 @@ interface TabButtonProps {
 
 const TabButton: React.FC<TabButtonProps> = ({ name, href }) => {
     return (
-        <Link className={styles.tabButton} href={href} passHref>
-            <span>{name}</span>
+        <Link
+            className={styles.tabButton}
+            href={href}
+        >
+            <span>
+                {name}
+            </span>
         </Link>
     );
 };

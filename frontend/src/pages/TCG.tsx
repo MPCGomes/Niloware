@@ -4,7 +4,9 @@ import React from 'react';
 const TCG: React.FC = () => {
     return (
         <MainLayout>
-            <h1>TCG</h1>
+            <h1>
+                TCG
+            </h1>
         </MainLayout>
     );
 };

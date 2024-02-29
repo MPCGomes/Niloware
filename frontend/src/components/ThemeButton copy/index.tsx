@@ -9,8 +9,14 @@ const ThemeButton: React.FC = () => {
   const theme = useAppSelector((state) => state.theme.mode);
 
   return (
-    <div className={styles.themeButton} onClick={() => dispatch(toggleTheme())}>
-      <Moon size={20} color={theme === 'light' ? '#04070b' : '#f4f7fb'} />
+    <div
+      className={styles.themeButton}
+      onClick={() => dispatch(toggleTheme())}
+    >
+      <Moon
+        size={20}
+        color={theme === 'light' ? '#04070b' : '#f4f7fb'}
+      />
     </div>
   );
 };

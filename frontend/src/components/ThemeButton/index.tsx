@@ -9,11 +9,20 @@ const ThemeButton: React.FC = () => {
   const theme = useAppSelector((state) => state.theme.mode);
 
   return (
-    <div className={styles.themeButton} onClick={() => dispatch(toggleTheme())}>
+    <div
+      className={styles.themeButton}
+      onClick={() => dispatch(toggleTheme())}
+    >
       {theme === 'light' ? (
-        <Sun size={20} color="#04070b" />
+        <Sun
+          size={20}
+          color="#04070b"
+        />
       ) : (
-        <Moon size={20} color="#f4f7fb" />
+        <Moon
+          size={20}
+          color="#f4f7fb"
+        />
       )}
     </div>
   );

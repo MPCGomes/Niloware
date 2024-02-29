@@ -26,8 +26,14 @@ const Header: React.FC = () => {
                     </Link>
                 </div>
                 <div className={styles.centerContent}>
-                    <TabButton href='/rpg' name='RPG' />
-                    <TabButton href='/tcg' name='TCG' />
+                    <TabButton
+                        href='/rpg'
+                        name='RPG'
+                    />
+                    <TabButton
+                        href='/tcg'
+                        name='TCG'
+                    />
                 </div>
                 <div className={styles.rightContent}>
                     <ThemeButton />

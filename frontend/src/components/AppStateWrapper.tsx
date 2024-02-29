@@ -3,7 +3,9 @@ import useApplyTheme from '@/hooks/useApplyTheme';
 
 const AppStateWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useApplyTheme();
-  return <>{children}</>;
+  return <>
+    {children}
+  </>;
 };
 
 export default AppStateWrapper;
