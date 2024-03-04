@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 import '../../../styles/globals.scss';
 
-const Button: React.FC<{ name: string; fill: string }> = ({ name, fill }) => {
-    // const backgroundColor = fill === 'fill' ? '#0f1922' : '#CACFD8'
-    const buttonClassName = `${styles.button} ${fill === 'filled' ? styles.filled : styles.blank}`;
+const Button: React.FC<{ name: string; fill: 'filled' | 'blank' }> = ({ name, fill }) => {
+    const buttonStyle = `${styles.button} ${styles[fill]}`;
 
     return (
-        <button className={buttonClassName}>
+        <button className={buttonStyle}>
             {name}
         </button>
     );
