@@ -10,8 +10,8 @@ const LanguageButton: React.FC = () => {
   return (
     <div className={styles.themeButton}>
       <Globe
-        size={20}
-        color={theme === 'light' ? '#04070b' : '#f4f7fb'}
+        size={26}
+        color='#CACFD8'
       />
     </div>
   );

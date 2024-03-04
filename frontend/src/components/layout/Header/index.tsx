@@ -4,10 +4,9 @@ import Link from 'next/link';
 import styles from './styles.module.css';
 import TabButton from '@/components/TabButton';
 import ThemeButton from '@/components/ThemeButton';
-import HollowButton from '@/components/Button/HollowButton';
-import FilledButton from '@/components/Button/FilledButton';
+import Button from '@/components/Button/Button';
 import { RootState } from '@/store/store';
-import '../../../styles/globals.css';
+import '../../../styles/globals.scss';
 import LanguageButton from '@/components/LanguageButton';
 
 const Header: React.FC = () => {
@@ -15,34 +14,30 @@ const Header: React.FC = () => {
 
     return (
         <div className={styles.header}>
-            <div className={styles.headerContent}>
                 <div className={styles.leftContent}>
                     <Link href='/'>
                         <img
                             className={styles.logo}
-                            src={theme === 'light' ? '/nilowareBlackLogo.png' : '/nilowareWhiteLogo.png'}
+                            src='/nilowareWhiteLogo.png'
                             alt='Logo'
                         />
                     </Link>
-                </div>
-                <div className={styles.centerContent}>
                     <TabButton
                         href='/rpg'
-                        name='RPG'
+                        name='Niloverse: RPG'
                     />
                     <TabButton
                         href='/tcg'
-                        name='TCG'
+                        name='Niloverse: TCG'
                     />
                 </div>
                 <div className={styles.rightContent}>
                     <ThemeButton />
                     <LanguageButton />
-                    <HollowButton name='Registrar' />
-                    <FilledButton name='Entrar' />
+                    <Button name='REGISTRAR-SE' fill='blank' />
+                    <Button name='ENTRAR' fill='filled' />
                 </div>
             </div>
-        </div>
     );
 };
 
