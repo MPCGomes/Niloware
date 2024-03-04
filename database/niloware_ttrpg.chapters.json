@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "65e603b8b0c42a0452a6efc8"
+  },
+  "game": "ARPS",
+  "chapters": [
+    {
+      "title": "Aspectos",
+      "sections": [
+        {
+          "title": "Aspectos Positivos",
+          "content": "Texto (Aspectos Positivos)",
+          "subsections": [
+            {
+              "title": "Ambidestro",
+              "prerequisites": "Proficiência em Combate à Distância ou Combate Corpo-a-Corpo.",
+              "points": [
+                {
+                  "point": 1,
+                  "benefits": [
+                    "Com uma ação, você pode embainhar qualquer número de armas usando mãos ocupadas ou desembainhar qualquer número de armas usando mãos livres.",
+                    "Você pode receber os benefícios do Combate com Duas Armas usando armas não leves.",
+                    "Enquanto você está empunhando uma arma em cada mão, sua CA aumenta em 1."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Aventura",
+      "sections": [
+        {
+          "title": "Asfixia",
+          "content": "Texto (Asfixia)",
+          "subsections": [
+            {
+              "title": "Subsection Title",
+              "content": "Subsection content."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}]
