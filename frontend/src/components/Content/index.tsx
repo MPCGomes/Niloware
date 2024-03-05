@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import '../../styles/globals.scss';
+import Sidebar from '../Sidebar';
 
 const Content: React.FC = () => {
     return (
         <div className={styles.container}>
             <div className={styles.leftContent}>
-
+                <Sidebar />
             </div>
             <div className={styles.centerContent}>
 
