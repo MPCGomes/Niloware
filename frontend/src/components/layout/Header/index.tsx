@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import TabButton from '@/components/TabButton';
 import ThemeButton from '@/components/ThemeButton';
-import Button from '@/components/Button/Button';
+import Button from '@/components/Button/ShapeButton';
 import { RootState } from '@/store/store';
 import '../../../styles/globals.scss';
 import LanguageButton from '@/components/LanguageButton';
