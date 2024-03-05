@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 import TabButton from '@/components/TabButton';
 import ThemeButton from '@/components/ThemeButton';
 import Button from '@/components/Button/Button';
