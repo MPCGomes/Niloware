@@ -1,15 +1,10 @@
 .container {
     display: flex;
     height: auto;
-    background-color: var(--background-color);
     align-items: center;
     justify-content: center;
-}
-
-.content {
-    background-color: var(--background-color);
-    width: 800px;
     height: 100%;
+    background-color: black;
 }
 
 .sidebar {
@@ -22,4 +17,21 @@
     background-color: var(--background-color);
     width: 150px;
     height: 100px;
+}
+
+.leftContent {
+    background-color: red;
+    width: 250px;
+    height: 50px;
+}
+
+.centerContent {
+    background-color: blue;
+    width: 1000px;
+    height: 100px;
+}
+
+.rightContent {
+    background-color: green;
+    width: 200px;
 }

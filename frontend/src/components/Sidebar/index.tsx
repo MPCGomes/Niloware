@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './styles.module.css';
+import { useFetch } from '@/hooks/useFetch';
 
 interface Chapter {
   id: number;
@@ -7,29 +8,7 @@ interface Chapter {
 }
 
 const Sidebar: React.FC = () => {
-  const [chapters, setChapters] = useState<Chapter[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchChapters = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/chapters');
-        if (!response.ok) {
-          throw new Error('Failed to fetch chapters');
-        }
-        const data = await response.json();
-        setChapters(data); 
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Fetch error:', error);
-        setError('Failed to load chapters.');
-        setIsLoading(false);
-      }
-    };
-
-    fetchChapters();
-  }, []); 
+  const { data: chapters, isLoading, error } = useFetch<Chapter[]>('http://localhost:8080/api/chapters');
 
   if (isLoading) return <div>Loading chapters...</div>;
   if (error) return <div>{error}</div>;
@@ -37,8 +16,8 @@ const Sidebar: React.FC = () => {
   return (
     <div className={styles.sidebar}>
       <ul>
-        {chapters.map((chapter) => (
-          <li key={chapter.id}>{chapter.title}</li> 
+        {chapters?.map((chapter) => (
+          <li key={chapter.id}>{chapter.title}</li>
         ))}
       </ul>
     </div>
