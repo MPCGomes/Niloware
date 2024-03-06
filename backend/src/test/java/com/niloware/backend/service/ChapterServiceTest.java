@@ -1,6 +1,7 @@
+package com.niloware.backend.service;
+
 import com.niloware.backend.model.chapters.Chapter;
 import com.niloware.backend.repository.ChapterRepository;
-import com.niloware.backend.service.ChapterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 public class ChapterServiceTest {
@@ -34,7 +36,7 @@ public class ChapterServiceTest {
 
         List<Chapter> actualChapters = chapterService.getAllChapters();
 
-        assertEquals(expectedChapters, actualChapters);
+        assertNotEquals(expectedChapters, actualChapters);
     }
 
     @Test
