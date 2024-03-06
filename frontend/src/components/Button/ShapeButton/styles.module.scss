@@ -40,7 +40,6 @@ $text-color-blank: $blank-border-color;
     display: flex;
     align-items: center;
     padding: 6px 16px;
-    margin-left: 6px;
     border: 2px solid transparent;
     border-radius: 5px;
     background-color: $accent-color;
@@ -59,6 +58,7 @@ $text-color-blank: $blank-border-color;
         background-color: $filled-bg-color;
         color: $text-color-filled;
         border: 2px solid transparent;
+        margin-right: 0;
         @include slide(filled)
     }
     &.blank {

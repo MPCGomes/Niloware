@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 import { useFetch } from '@/hooks/useFetch';
 
 interface Chapter {
@@ -14,13 +14,7 @@ const Sidebar: React.FC = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className={styles.sidebar}>
-      <ul>
-        {chapters?.map((chapter) => (
-          <li key={chapter.id}>{chapter.title}</li>
-        ))}
-      </ul>
-    </div>
+    <div></div>
   );
 };
 

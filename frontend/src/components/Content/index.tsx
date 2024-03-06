@@ -5,16 +5,10 @@ import Sidebar from '../Sidebar';
 
 const Content: React.FC = () => {
     return (
-        <div className={styles.container}>
-            <div className={styles.leftContent}>
-                <Sidebar />
-            </div>
-            <div className={styles.centerContent}>
-
-            </div>
-            <div className={styles.rightContent}>
-
-            </div>
+        <div className={styles.mainContainer}>
+            <div className={styles.firstColumn}></div>
+            <div className={styles.secondColumn}></div>
+            <div className={styles.thirdColumn}></div>
         </div>
     );
 };

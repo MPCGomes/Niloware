@@ -1,37 +1,24 @@
-.container {
+.mainContainer {
     display: flex;
-    height: auto;
-    align-items: center;
     justify-content: center;
-    height: 100%;
-    background-color: black;
 }
 
-.sidebar {
-    background-color: var(--background-color);
-    width: 250px;
-    height: 100px;
-}
-
-.index {
-    background-color: var(--background-color);
-    width: 150px;
-    height: 100px;
-}
-
-.leftContent {
+.firstColumn {
+    width: 18%;
+    height: 500px;
     background-color: red;
-    width: 250px;
-    height: 50px;
+    max-width: 230px;
 }
 
-.centerContent {
-    background-color: blue;
-    width: 1000px;
-    height: 100px;
+.secondColumn {
+    width: 60%;
+    height: 500px;
+    background-color: rgb(0, 255, 68);
+    max-width: 700px;
 }
-
-.rightContent {
-    background-color: green;
-    width: 200px;
+.thirdColumn {
+    width: 18%;
+    height: 500px;
+    background-color: rgb(55, 0, 255);
+    max-width: 210px;
 }
