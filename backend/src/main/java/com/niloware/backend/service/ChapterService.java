@@ -1,6 +1,6 @@
 package com.niloware.backend.service;
 
-import com.niloware.backend.model.Chapter;
+import com.niloware.backend.model.chapters.Chapter;
 import com.niloware.backend.repository.ChapterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

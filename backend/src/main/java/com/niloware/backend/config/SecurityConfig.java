@@ -16,14 +16,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .httpBasic(httpBasicConfigurer -> {})
-
                 .csrf(AbstractHttpConfigurer::disable)
-
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/chapters").permitAll()
                         .anyRequest().authenticated()
                 );
-
         return http.build();
     }
 

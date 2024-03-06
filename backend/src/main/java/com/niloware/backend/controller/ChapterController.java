@@ -1,6 +1,6 @@
 package com.niloware.backend.controller;
 
-import com.niloware.backend.model.Chapter;
+import com.niloware.backend.model.chapters.Chapter;
 import com.niloware.backend.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
