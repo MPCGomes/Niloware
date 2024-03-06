@@ -17,4 +17,5 @@ jobs:
       - name: Run unit tests
         run: |
           cd backend
+          chmod +x gradlew
           ./gradlew test
