@@ -1,16 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 import TabButton from '@/components/TabButton';
 import ThemeButton from '@/components/ThemeButton';
 import Button from '@/components/Button/ShapeButton';
-import { RootState } from '@/store/store';
 import '../../../styles/globals.scss';
 import LanguageButton from '@/components/LanguageButton';
 
 const Header: React.FC = () => {
-    const theme = useSelector((state: RootState) => state.theme.mode);
 
     return (
         <div className={styles.header}>

@@ -1,17 +1,22 @@
 import { AppProps } from 'next/app';
-import { Provider } from 'react-redux';
-import { store } from '@/store/store';
-import AppStateWrapper from '@/components/AppStateWrapper';
+import { ThemeProvider, useTheme } from '@/context/ThemeContext';
 import '../styles/globals.scss';
+import { useEffect, useState } from 'react';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    document.body.className = storedTheme || 'light';
+    setTheme(storedTheme || 'light');
+  }, []);
+
   return (
-    <Provider store={store}>
-      <AppStateWrapper>
-        <Component {...pageProps} />
-      </AppStateWrapper>
-    </Provider>
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
-}
+};
 
 export default MyApp;
