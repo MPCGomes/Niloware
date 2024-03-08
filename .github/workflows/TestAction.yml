@@ -1,7 +1,7 @@
 name: Validate Code
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, edited, synchronize]
     branches: [ "main" ]
 jobs:
   run-unit-tests:
@@ -16,6 +16,7 @@ jobs:
           java-version: '21'
       - name: Run unit tests
         run: |
+          sqlcmd -?
           cd backend
           chmod +x gradlew
           ./gradlew test
