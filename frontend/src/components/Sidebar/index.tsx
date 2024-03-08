@@ -1,52 +1,50 @@
-import React, { useState } from 'react';
-import SidebarItem from './SidebarItem';
-import styles from './styles.module.scss';
+import React from 'react';
+import { useRouter } from 'next/router';
 
-// Define a estrutura de um item da Sidebar, onde cada item pode opcionalmente ter subitens
-interface Item {
-  name: string; // O nome do item
-  subItems?: Item[]; // Uma lista opcional de subitens, que também são do tipo Item
+interface ContentStructureItem {
+  chapter: string;
+  examples: string[];
 }
 
-// Lista estática de itens para serem exibidos na Sidebar
-const items: Item[] = [
-  {
-    name: 'Tópico 1',
-    subItems: [
-      { name: 'Subtópico 1.1' },
-      { name: 'Subtópico 1.2' },
-    ],
-  },
-  {
-    name: 'Tópico 2',
-    subItems: [
-      { name: 'Subtópico 2.1' },
-      { name: 'Subtópico 2.2' },
-    ],
-  },
-  // Adicione mais tópicos conforme necessário
-];
+interface SidebarProps {
+  contentStructure: ContentStructureItem[];
+  onSelect: (path: string) => void;
+}
 
-// Componente funcional Sidebar
-const Sidebar: React.FC = () => {
-  // State para controlar qual item está atualmente ativo
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+const Sidebar: React.FC<SidebarProps> = ({ contentStructure, onSelect }) => {
+  const [expandedChapters, setExpandedChapters] = React.useState<string[]>([]);
+  const router = useRouter();
 
-  // Função para lidar com o clique em um item, definindo-o como ativo ou não
-  const handleClick = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index); // Alterna o estado ativo baseado no índice clicado
+  const handleSelect = (chapter: string, example: string) => {
+    const examplePath = `${chapter}/${example}`;
+    onSelect(examplePath);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, selectedPath: examplePath },
+    }, undefined, { shallow: true });
   };
 
-  // Renderiza a sidebar com seus itens e subitens, passando props necessárias para o SidebarItem
+  const toggleChapter = (chapter: string) => {
+    setExpandedChapters(prev => prev.includes(chapter) ? prev.filter(c => c !== chapter) : [...prev, chapter]);
+  };
+
   return (
-    <div className="sidebar">
-      {items.map((item, index) => (
-        <SidebarItem
-          key={index} // Chave única para cada item (necessária em listas no React)
-          item={item} // O item atual a ser renderizado
-          active={index === activeIndex} // Booleano indicando se o item está ativo
-          onClick={() => handleClick(index)} // Função chamada ao clicar no item
-        />
+    <div>
+      {contentStructure.map(({ chapter, examples }) => (
+        <div key={chapter}>
+          <button onClick={() => toggleChapter(chapter)}>{chapter}</button>
+          {expandedChapters.includes(chapter) && (
+            <div>
+              {examples.map(example => (
+                <div key={example}>
+                  <button onClick={() => handleSelect(chapter, example)}>
+                    {example}
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       ))}
     </div>
   );

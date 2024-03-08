@@ -1,13 +1,45 @@
-import Content from '@/components/Content';
 import MainLayout from '@/components/layout';
-import React from 'react';
+import React, { useState } from 'react';
+import { GetStaticProps } from 'next';
+import { getContentStructure } from '../lib/contentReader';
+import Sidebar from '@/components/Sidebar';
+import MarkdownRenderer from '@/components/MarkdownRenderer/intex';
 
-const RPG: React.FC = () => {
-    return (
-        <MainLayout>
-            <Content />
-        </MainLayout>
-    );
+export const getStaticProps: GetStaticProps = async () => {
+  const contentStructure = getContentStructure();
+  return {
+    props: {
+      contentStructure,
+    },
+    revalidate: 3600,
+  };
+};
+
+interface ContentStructureItem {
+  chapter: string;
+  examples: string[];
+}
+
+interface RPGProps {
+  contentStructure: ContentStructureItem[];
+}
+
+const RPG: React.FC<RPGProps> = ({ contentStructure }) => {
+  const [selectedPath, setSelectedPath] = useState('');
+
+  const handleSelect = (path: string) => {
+    setSelectedPath(path);
+  };
+
+  return (
+    <MainLayout>
+      <Sidebar
+        contentStructure={contentStructure}
+        onSelect={handleSelect}
+      />
+      {selectedPath && <MarkdownRenderer path={selectedPath} />}
+    </MainLayout>
+  );
 };
 
 export default RPG;
