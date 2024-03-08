@@ -7,10 +7,13 @@ const Content: React.FC = () => {
     return (
         <div className={styles.mainContainer}>
             <div className={styles.firstColumn}>
-                <Sidebar></Sidebar>
             </div>
-            <div className={styles.secondColumn}></div>
-            <div className={styles.thirdColumn}></div>
+            <div className={styles.secondColumn}>
+
+            </div>
+            <div className={styles.thirdColumn}>
+
+            </div>
         </div>
     );
 };
