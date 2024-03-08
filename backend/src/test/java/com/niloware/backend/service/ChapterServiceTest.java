@@ -36,7 +36,7 @@ public class ChapterServiceTest {
 
         List<Chapter> actualChapters = chapterService.getAllChapters();
 
-        assertNotEquals(expectedChapters, actualChapters);
+        assertEquals(expectedChapters, actualChapters);
     }
 
     @Test
