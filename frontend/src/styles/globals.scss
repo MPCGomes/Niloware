@@ -23,19 +23,18 @@
 }
 
 :root {
-  --primary-color: #2f70ca;
-  --secondary-color: #143d76;
-  --accent-color: #1356b4;
-  --background-color: #f3f8fc;
+  --background-color: #E9EEF2;
   --text-color: #04070b;
   --hover-black: #202C37;
   --background-always-dark: #040F18;
   --text-always-white: #f4f7fb;
+  --hover: #243442;
 }
 
 .dark {
   --background-color: #040F18;
-  --text-color: #f4f7fb;
+  --text-color: #DADEE5;
+  --hover: #9DB0BF;
 }
 
 body {

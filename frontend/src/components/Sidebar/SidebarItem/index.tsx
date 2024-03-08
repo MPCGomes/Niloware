@@ -19,7 +19,7 @@ interface SidebarItemProps {
 const SidebarItem: React.FC<SidebarItemProps> = ({ item, active, onClick }) => {
   return (
     <div>
-      <div className="sidebar-item" onClick={onClick}>
+      <div className={styles.sidebarItem} onClick={onClick}>
         {item.name}
       </div>
       {active && item.subItems && ( // Verifica se o item está ativo e se tem subitens para renderizá-los
