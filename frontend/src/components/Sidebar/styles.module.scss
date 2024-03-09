@@ -1,0 +1,75 @@
+.mainButton {
+    display: flex;
+    font-size: 17px;
+    font-weight: bolder;
+    padding-block: 5px;
+    padding-left: 12px;
+    padding-right: 4px;
+    cursor: pointer;
+    margin-block: 10px;
+    margin-block: 10px;
+    margin-right: 20px;
+    margin-left: 0;
+    border-radius: 6px;
+    border: 0;
+    transition: transform 0.5s, background-color 0.3s;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
+    user-select: none;
+    &:hover {
+        transform: scale(1.05);
+        background-color: var(--hover);
+    };
+    &:active {
+        background-color: var(--hover-clicked);
+        & ~ .subButtonsContainer::after{
+            animation: slideUp 1s ease-in;
+        }
+    }
+}
+
+.subButton {
+    cursor: pointer;
+    font-size: 17px;
+    margin-left: 30px;
+    margin-block: 10px;
+    padding-block: 5px;
+    user-select: none;
+    &:hover {
+        font-weight: bold;
+        transform: scale(1.02);
+    }
+    &:active {
+        font-weight: bold;
+        transform: scale(1)
+    }
+}
+
+.subButtonsContainer {
+    overflow: hidden;
+    animation: slideDown 0.3s ease-in;
+}
+
+@keyframes slideDown {
+    from {
+        max-height: 0;
+    }
+  
+    to {
+        max-height: 500px;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+        max-height: 500px;
+    }
+  
+    to {
+        max-height: 0;
+    }
+  }
+
+

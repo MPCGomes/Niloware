@@ -27,15 +27,19 @@
   --secondary-color: #143d76;
   --accent-color: #1356b4;
   --background-color: #f3f8fc;
-  --text-color: #04070b;
+  --text-color: #262829;
   --hover-black: #202C37;
+  --hover: #9db0bfce;
+  --hover-clicked: #9db0bf3f;
   --background-always-dark: #040F18;
   --text-always-white: #f4f7fb;
 }
 
 .dark {
   --background-color: #040F18;
-  --text-color: #f4f7fb;
+  --text-color: #DADEE5;
+  --hover: #202c37bc;
+  --hover-clicked: #202c372d;
 }
 
 body {

@@ -4,6 +4,7 @@ import { GetStaticProps } from 'next';
 import { getContentStructure } from '../lib/contentReader';
 import Sidebar from '@/components/Sidebar';
 import MarkdownRenderer from '@/components/MarkdownRenderer/intex';
+import styles from '../styles/rpg.module.scss'
 
 export const getStaticProps: GetStaticProps = async () => {
   const contentStructure = getContentStructure();
@@ -33,11 +34,20 @@ const RPG: React.FC<RPGProps> = ({ contentStructure }) => {
 
   return (
     <MainLayout>
-      <Sidebar
-        contentStructure={contentStructure}
-        onSelect={handleSelect}
-      />
-      {selectedPath && <MarkdownRenderer path={selectedPath} />}
+      <div className={styles.mainContainer}>
+        <div className={styles.firstColumn}>
+          <Sidebar
+            contentStructure={contentStructure}
+            onSelect={handleSelect}
+          />
+        </div>
+        <div className={styles.secondColumn}>
+          {selectedPath && <MarkdownRenderer path={selectedPath} />}
+        </div>
+        <div className={styles.thirdColumn}>
+
+        </div>
+      </div>
     </MainLayout>
   );
 };
