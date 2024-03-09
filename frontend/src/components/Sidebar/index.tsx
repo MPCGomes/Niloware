@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import styles from './styles.module.scss';
 
 interface ContentStructureItem {
   chapter: string;
@@ -32,7 +33,7 @@ const Sidebar: React.FC<SidebarProps> = ({ contentStructure, onSelect }) => {
     <div>
       {contentStructure.map(({ chapter, examples }) => (
         <div key={chapter}>
-          <button onClick={() => toggleChapter(chapter)}>{chapter}</button>
+          <button onClick={() => toggleChapter(chapter)} className={styles.mainButton}>{chapter}</button>
           {expandedChapters.includes(chapter) && (
             <div>
               {examples.map(example => (
