@@ -26,6 +26,8 @@
   --background-color: #E9EEF2;
   --text-color: #04070b;
   --hover-black: #202C37;
+  --hover: #9db0bfce;
+  --hover-clicked: #9db0bf3f;
   --background-always-dark: #040F18;
   --text-always-white: #f4f7fb;
   --hover: #243442;
@@ -34,7 +36,8 @@
 .dark {
   --background-color: #040F18;
   --text-color: #DADEE5;
-  --hover: #9DB0BF;
+  --hover: #202c37bc;
+  --hover-clicked: #202c372d;
 }
 
 body {

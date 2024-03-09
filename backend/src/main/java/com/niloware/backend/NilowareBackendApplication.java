@@ -9,5 +9,4 @@ public class NilowareBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NilowareBackendApplication.class, args);
 	}
-
 }

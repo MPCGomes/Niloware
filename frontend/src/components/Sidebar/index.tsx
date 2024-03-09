@@ -1,52 +1,75 @@
-import React, { useState } from 'react';
-import SidebarItem from './SidebarItem';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
+import { ChevronRight, ChevronDown } from 'lucide-react';
 
-// Define a estrutura de um item da Sidebar, onde cada item pode opcionalmente ter subitens
-interface Item {
-  name: string; // O nome do item
-  subItems?: Item[]; // Uma lista opcional de subitens, que também são do tipo Item
+interface ContentStructureItem {
+  chapter: string;
+  examples: string[];
 }
 
-// Lista estática de itens para serem exibidos na Sidebar
-const items: Item[] = [
-  {
-    name: 'Tópico 1',
-    subItems: [
-      { name: 'Subtópico 1.1' },
-      { name: 'Subtópico 1.2' },
-    ],
-  },
-  {
-    name: 'Tópico 2',
-    subItems: [
-      { name: 'Subtópico 2.1' },
-      { name: 'Subtópico 2.2' },
-    ],
-  },
-  // Adicione mais tópicos conforme necessário
-];
+interface SidebarProps {
+  contentStructure: ContentStructureItem[];
+  onSelect: (path: string) => void;
+}
 
-// Componente funcional Sidebar
-const Sidebar: React.FC = () => {
-  // State para controlar qual item está atualmente ativo
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+const Sidebar: React.FC<SidebarProps> = ({ contentStructure, onSelect }) => {
+  const [expandedChapters, setExpandedChapters] = useState<string[]>([]);
+  const router = useRouter();
+  const [timeoutIds, setTimeoutIds] = useState<NodeJS.Timeout[]>([]);
 
-  // Função para lidar com o clique em um item, definindo-o como ativo ou não
-  const handleClick = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index); // Alterna o estado ativo baseado no índice clicado
+  const handleSelect = (chapter: string, example: string) => {
+    const examplePath = `${chapter}/${example}`;
+    onSelect(examplePath);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, selectedPath: examplePath },
+    }, undefined, { shallow: true });
   };
 
-  // Renderiza a sidebar com seus itens e subitens, passando props necessárias para o SidebarItem
+  const toggleChapter = (chapter: string) => {
+    const isExpanded = expandedChapters.includes(chapter);
+    if (isExpanded) {
+      const timeoutId = setTimeout(() => {
+        setExpandedChapters(prev => prev.filter(c => c !== chapter));
+      }, 300)
+      setTimeoutIds(prev => [...prev, timeoutId]);
+    } else {
+      setExpandedChapters(prev => [...prev, chapter]);
+    }
+
+  };
+
+  useEffect(() => {
+    return () => {
+      timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
+    };
+  }, [timeoutIds]);
+
   return (
-    <div className="sidebar">
-      {items.map((item, index) => (
-        <SidebarItem
-          key={index} // Chave única para cada item (necessária em listas no React)
-          item={item} // O item atual a ser renderizado
-          active={index === activeIndex} // Booleano indicando se o item está ativo
-          onClick={() => handleClick(index)} // Função chamada ao clicar no item
-        />
+    <div>
+      {contentStructure.map(({ chapter, examples }) => (
+        <div key={chapter}>
+          <div onClick={() => toggleChapter(chapter)} className={styles.mainButton}>
+            {chapter} 
+            {expandedChapters.includes(chapter) ? (
+              <ChevronDown className={styles.arrow} size={26} color={'var(--text-color)'} />
+            ) : (
+              <ChevronRight className={styles.arrow} size={26} color={'var(--text-color)'} />
+            )}
+          </div>
+          {expandedChapters.includes(chapter) && (
+            <div className={styles.subButtonsContainer }>
+              {examples.map(example => (
+                <div key={example}>
+                  <div onClick={() => handleSelect(chapter, example)} className={styles.subButton}>
+                    {example}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       ))}
     </div>
   );
