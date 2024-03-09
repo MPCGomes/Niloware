@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
+import { ChevronRight, ChevronDown } from 'lucide-react';
 
 interface ContentStructureItem {
   chapter: string;
@@ -13,8 +14,9 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ contentStructure, onSelect }) => {
-  const [expandedChapters, setExpandedChapters] = React.useState<string[]>([]);
+  const [expandedChapters, setExpandedChapters] = useState<string[]>([]);
   const router = useRouter();
+  const [timeoutIds, setTimeoutIds] = useState<NodeJS.Timeout[]>([]);
 
   const handleSelect = (chapter: string, example: string) => {
     const examplePath = `${chapter}/${example}`;
@@ -26,21 +28,43 @@ const Sidebar: React.FC<SidebarProps> = ({ contentStructure, onSelect }) => {
   };
 
   const toggleChapter = (chapter: string) => {
-    setExpandedChapters(prev => prev.includes(chapter) ? prev.filter(c => c !== chapter) : [...prev, chapter]);
+    const isExpanded = expandedChapters.includes(chapter);
+    if (isExpanded) {
+      const timeoutId = setTimeout(() => {
+        setExpandedChapters(prev => prev.filter(c => c !== chapter));
+      }, 300)
+      setTimeoutIds(prev => [...prev, timeoutId]);
+    } else {
+      setExpandedChapters(prev => [...prev, chapter]);
+    }
+
   };
+
+  useEffect(() => {
+    return () => {
+      timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
+    };
+  }, [timeoutIds]);
 
   return (
     <div>
       {contentStructure.map(({ chapter, examples }) => (
         <div key={chapter}>
-          <button onClick={() => toggleChapter(chapter)} className={styles.mainButton}>{chapter}</button>
+          <div onClick={() => toggleChapter(chapter)} className={styles.mainButton}>
+            {chapter} 
+            {expandedChapters.includes(chapter) ? (
+              <ChevronDown className={styles.arrow} size={26} color={'var(--text-color)'} />
+            ) : (
+              <ChevronRight className={styles.arrow} size={26} color={'var(--text-color)'} />
+            )}
+          </div>
           {expandedChapters.includes(chapter) && (
-            <div>
+            <div className={styles.subButtonsContainer }>
               {examples.map(example => (
                 <div key={example}>
-                  <button onClick={() => handleSelect(chapter, example)}>
+                  <div onClick={() => handleSelect(chapter, example)} className={styles.subButton}>
                     {example}
-                  </button>
+                  </div>
                 </div>
               ))}
             </div>
