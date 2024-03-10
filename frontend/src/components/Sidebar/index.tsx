@@ -30,33 +30,23 @@ const Sidebar: React.FC<SidebarProps> = ({ contentStructure, onSelect }) => {
   const toggleChapter = (chapter: string) => {
     const isExpanded = expandedChapters.includes(chapter);
     if (isExpanded) {
-      const timeoutId = setTimeout(() => {
         setExpandedChapters(prev => prev.filter(c => c !== chapter));
-      }, 300)
-      setTimeoutIds(prev => [...prev, timeoutId]);
     } else {
       setExpandedChapters(prev => [...prev, chapter]);
     }
 
   };
-
-  useEffect(() => {
-    return () => {
-      timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
-    };
-  }, [timeoutIds]);
-
   return (
     <div>
       {contentStructure.map(({ chapter, examples }) => (
         <div key={chapter}>
           <div onClick={() => toggleChapter(chapter)} className={styles.mainButton}>
-            {chapter} 
-            {expandedChapters.includes(chapter) ? (
-              <ChevronDown className={styles.arrow} size={26} color={'var(--text-color)'} />
+            <div className={styles.mainButtonText}>{chapter}</div>
+            <div>{expandedChapters.includes(chapter) ? (
+              <ChevronDown className={styles.arrow} size={24} color={'var(--text-color)'} />
             ) : (
-              <ChevronRight className={styles.arrow} size={26} color={'var(--text-color)'} />
-            )}
+              <ChevronRight className={styles.arrow} size={24} color={'var(--text-color)'} />
+            )}</div>
           </div>
           {expandedChapters.includes(chapter) && (
             <div className={styles.subButtonsContainer }>

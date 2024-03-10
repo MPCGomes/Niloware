@@ -3,9 +3,11 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import TabButton from '@/components/TabButton';
 import ThemeButton from '@/components/ThemeButton';
-import Button from '@/components/Button/ShapeButton';
+import Modal from '../../Modal/Modal';
 import '../../../styles/globals.scss';
 import LanguageButton from '@/components/LanguageButton';
+import LoginModal from '../../Modal/LoginModal/LoginModal'
+import RegisterModal from '../../Modal/RegisterModal/Register'
 
 const Header: React.FC = () => {
 
@@ -29,10 +31,10 @@ const Header: React.FC = () => {
                     />
                 </div>
                 <div className={styles.rightContent}>
-                    <ThemeButton />
+                    <ThemeButton/>
                     <LanguageButton />
-                    <Button name='REGISTRAR-SE' fill='blank' />
-                    <Button name='ENTRAR' fill='filled' />
+                    <RegisterModal/>
+                    <LoginModal/>
                 </div>
             </div>
     );

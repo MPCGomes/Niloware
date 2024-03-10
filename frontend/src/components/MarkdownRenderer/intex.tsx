@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import styles from '../../styles/markdown.module.scss';
+import styles from './styles.module.scss';
 
 interface MarkdownRendererProps {
   path: string;
@@ -23,7 +23,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ path }) => {
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}
         children={content}
-      />;
+        className={styles.text}
+      />
     </div>
   )
 };

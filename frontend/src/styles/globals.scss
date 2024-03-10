@@ -31,8 +31,12 @@
   --hover-black: #202C37;
   --hover: #9db0bfce;
   --hover-clicked: #9db0bf3f;
+  --border: #81919dcb;
   --background-always-dark: #040F18;
+  --background-modal: #f3f8fc;
+  --text-modal: #262829;
   --text-always-white: #f4f7fb;
+  --button-modal: #262829;
 }
 
 .dark {
@@ -40,6 +44,10 @@
   --text-color: #DADEE5;
   --hover: #202c37bc;
   --hover-clicked: #202c372d;
+  --border: #9db0bf49;
+  --background-modal: #0f1922;
+  --text-modal: #C6CFDC;
+  --button-modal: #CACFD8;
 }
 
 body {
