@@ -4,6 +4,8 @@ import com.niloware.backend.dto.UserDTO;
 import com.niloware.backend.model.User;
 import com.niloware.backend.repository.UserRepository;
 import com.niloware.backend.security.SecurityConfig;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,12 @@ public class UserService {
     public UserService(UserRepository userRepository, SecurityConfig securityConfig) {
         this.userRepository = userRepository;
         this.passwordEncoder = securityConfig.passwordEncoder();
+    }
+
+    private boolean isCurrentUser(String username) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        return username.equals(currentUsername);
     }
 
     public User registerUser(UserDTO userDTO) {
@@ -40,6 +48,9 @@ public class UserService {
     }
 
     public void changePassword(UserDTO userDTO) {
+        if (!isCurrentUser(userDTO.getUsername())) {
+            throw new SecurityException("You can only change your own password");
+        }
         User user = userRepository.findByEmail(userDTO.getEmail());
         if (user == null) {
             return;
@@ -49,6 +60,9 @@ public class UserService {
     }
 
     public void changeUsername(UserDTO userDTO) {
+        if (!isCurrentUser(userDTO.getUsername())) {
+            throw new SecurityException("You can only change your own username");
+        }
         User user = userRepository.findByEmail(userDTO.getEmail());
         if (user == null) {
             return;
@@ -58,6 +72,9 @@ public class UserService {
     }
 
     public void changeEmail(UserDTO userDTO) {
+        if (!isCurrentUser(userDTO.getUsername())) {
+            throw new SecurityException("You can only change your own email");
+        }
         User user = userRepository.findByUsername(userDTO.getUsername());
         if (user == null) {
             return;
