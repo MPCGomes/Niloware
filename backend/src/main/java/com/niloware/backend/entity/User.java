@@ -1,16 +1,15 @@
-package com.niloware.backend.model;
+package com.niloware.backend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name="users")
 public class User {
     @Id
@@ -20,4 +19,8 @@ public class User {
     private String password;
     private LocalDate birthdate;
     private String username;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private Role role;
 }

@@ -1,11 +1,12 @@
 package com.niloware.backend.service;
 
 import com.niloware.backend.dto.UserDTO;
-import com.niloware.backend.model.User;
+import com.niloware.backend.entity.User;
 import com.niloware.backend.repository.UserRepository;
 import com.niloware.backend.security.SecurityConfig;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,10 +52,9 @@ public class UserService {
         if (!isCurrentUser(userDTO.getUsername())) {
             throw new SecurityException("You can only change your own password");
         }
-        User user = userRepository.findByEmail(userDTO.getEmail());
-        if (user == null) {
-            return;
-        }
+        User user = userRepository.findByEmail(userDTO.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userDTO.getEmail()));
+
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userRepository.save(user);
     }
@@ -63,10 +63,9 @@ public class UserService {
         if (!isCurrentUser(userDTO.getUsername())) {
             throw new SecurityException("You can only change your own username");
         }
-        User user = userRepository.findByEmail(userDTO.getEmail());
-        if (user == null) {
-            return;
-        }
+        User user = userRepository.findByEmail(userDTO.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userDTO.getEmail()));
+
         user.setUsername(userDTO.getUsername());
         userRepository.save(user);
     }
@@ -75,10 +74,9 @@ public class UserService {
         if (!isCurrentUser(userDTO.getUsername())) {
             throw new SecurityException("You can only change your own email");
         }
-        User user = userRepository.findByUsername(userDTO.getUsername());
-        if (user == null) {
-            return;
-        }
+        User user = userRepository.findByUsername(userDTO.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + userDTO.getUsername()));
+
         user.setEmail(userDTO.getEmail());
         userRepository.save(user);
     }

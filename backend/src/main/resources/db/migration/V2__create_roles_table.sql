@@ -1,0 +1,10 @@
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+ALTER TABLE users ADD COLUMN role_id BIGINT;
+
+ALTER TABLE users
+ADD CONSTRAINT fk_role
+FOREIGN KEY (role_id) REFERENCES roles(id);

@@ -1,7 +1,7 @@
 package com.niloware.backend.controller;
 
 import com.niloware.backend.dto.UserDTO;
-import com.niloware.backend.model.User;
+import com.niloware.backend.entity.User;
 import com.niloware.backend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
