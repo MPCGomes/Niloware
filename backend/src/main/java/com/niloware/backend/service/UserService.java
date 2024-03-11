@@ -1,7 +1,9 @@
 package com.niloware.backend.service;
 
 import com.niloware.backend.dto.UserDTO;
+import com.niloware.backend.entity.Role;
 import com.niloware.backend.entity.User;
+import com.niloware.backend.repository.RoleRepository;
 import com.niloware.backend.repository.UserRepository;
 import com.niloware.backend.security.SecurityConfig;
 import org.springframework.security.core.Authentication;
@@ -9,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -17,10 +18,12 @@ import java.time.Period;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, SecurityConfig securityConfig) {
+    public UserService(UserRepository userRepository, SecurityConfig securityConfig, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = securityConfig.passwordEncoder();
+        this.roleRepository = roleRepository;
     }
 
     private boolean isCurrentUser(String username) {
@@ -39,6 +42,11 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setBirthdate(userDTO.getBirthdate());
         user.setUsername(userDTO.getUsername());
+
+        Role userRole = roleRepository.findByName("USER")
+                .orElseThrow(() -> new RuntimeException("Error: Role USER not found."));
+        user.setRole(userRole);
+
         return userRepository.save(user);
     }
 
