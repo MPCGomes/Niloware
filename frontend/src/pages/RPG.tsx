@@ -5,6 +5,7 @@ import { getContentStructure } from '../lib/contentReader';
 import Sidebar from '@/components/Sidebar';
 import MarkdownRenderer from '@/components/MarkdownRenderer/intex';
 import styles from '../styles/rpg.module.scss'
+import TableOfContents from '@/components/TableOfContents/TableOfContents';
 
 export const getStaticProps: GetStaticProps = async () => {
   const contentStructure = getContentStructure();
@@ -27,6 +28,7 @@ interface RPGProps {
 
 const RPG: React.FC<RPGProps> = ({ contentStructure }) => {
   const [selectedPath, setSelectedPath] = useState('');
+  const [content, setContent] = useState('');
 
   const handleSelect = (path: string) => {
     setSelectedPath(path);
@@ -42,10 +44,10 @@ const RPG: React.FC<RPGProps> = ({ contentStructure }) => {
           />
         </div>
         <div className={styles.secondColumn}>
-          {selectedPath && <MarkdownRenderer path={selectedPath} />}
+          {selectedPath && <MarkdownRenderer path={selectedPath} onContentChange={setContent} />}
         </div>
         <div className={styles.thirdColumn}>
-
+          <TableOfContents content={content} />
         </div>
       </div>
     </MainLayout>
