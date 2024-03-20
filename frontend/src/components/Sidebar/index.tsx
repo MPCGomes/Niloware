@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import styles from './styles.module.scss';
 import { ChevronRight, ChevronDown } from 'lucide-react';
+import styles from './styles.module.scss';
 
 interface ContentStructureItem {
   chapter: string;
-  examples: string[];
+  sections: string[];
 }
 
 interface SidebarProps {
@@ -16,54 +16,55 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ contentStructure, onSelect }) => {
   const [expandedChapters, setExpandedChapters] = useState<string[]>([]);
   const router = useRouter();
-  const [timeoutIds, setTimeoutIds] = useState<NodeJS.Timeout[]>([]);
 
-  const handleSelect = (chapter: string, example: string) => {
-    const examplePath = `${chapter}/${example}`;
-    onSelect(examplePath);
+  const handleSelect = (chapter: string, section: string) => {
+    const sectionPath = `${chapter}/${section}`;
+    onSelect(sectionPath);
     router.push({
       pathname: router.pathname,
-      query: { ...router.query, selectedPath: examplePath },
+      query: {
+        ...router.query,
+        selectedPath: sectionPath
+      },
     }, undefined, { shallow: true });
   };
 
   const toggleChapter = (chapter: string) => {
-    const isExpanded = expandedChapters.includes(chapter);
-    if (isExpanded) {
-      const timeoutId = setTimeout(() => {
-        setExpandedChapters(prev => prev.filter(c => c !== chapter));
-      }, 300)
-      setTimeoutIds(prev => [...prev, timeoutId]);
-    } else {
-      setExpandedChapters(prev => [...prev, chapter]);
-    }
-
+    setExpandedChapters(prev => prev.includes(chapter) ? prev.filter(c => c !== chapter) : [...prev, chapter]);
   };
-
-  useEffect(() => {
-    return () => {
-      timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
-    };
-  }, [timeoutIds]);
 
   return (
     <div>
-      {contentStructure.map(({ chapter, examples }) => (
+      {contentStructure.map(({ chapter, sections }) => (
         <div key={chapter}>
-          <div onClick={() => toggleChapter(chapter)} className={styles.mainButton}>
-            {chapter} 
+          <div
+            onClick={() => toggleChapter(chapter)}
+            className={styles.mainButton}
+          >
+            {chapter}
             {expandedChapters.includes(chapter) ? (
-              <ChevronDown className={styles.arrow} size={26} color={'var(--text-color)'} />
+              <ChevronDown
+                className={styles.arrow}
+                size={26}
+                color={'var(--text-color)'}
+              />
             ) : (
-              <ChevronRight className={styles.arrow} size={26} color={'var(--text-color)'} />
+              <ChevronRight
+                className={styles.arrow}
+                size={26}
+                color={'var(--text-color)'}
+              />
             )}
           </div>
           {expandedChapters.includes(chapter) && (
-            <div className={styles.subButtonsContainer }>
-              {examples.map(example => (
-                <div key={example}>
-                  <div onClick={() => handleSelect(chapter, example)} className={styles.subButton}>
-                    {example}
+            <div className={styles.subButtonsContainer}>
+              {sections.map(section => (
+                <div key={section}>
+                  <div
+                    onClick={() => handleSelect(chapter, section)}
+                    className={styles.subButton}
+                  >
+                    {section}
                   </div>
                 </div>
               ))}

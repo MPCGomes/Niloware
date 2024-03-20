@@ -1,11 +1,11 @@
-import MainLayout from '@/components/layout';
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
-import { getContentStructure } from '../lib/contentReader';
-import Sidebar from '@/components/Sidebar';
-import MarkdownRenderer from '@/components/MarkdownRenderer/intex';
-import styles from '../styles/rpg.module.scss'
-import TableOfContents from '@/components/TableOfContents/TableOfContents';
+import MainLayout from '../components/layout';
+import Sidebar from '../components/Sidebar';
+import MarkdownRenderer from '../components/MarkdownRenderer/intex';
+import TableOfContents from '../components/TableOfContents/TableOfContents';
+import styles from '../styles/rpg.module.scss';
+import { getContentStructure } from '../lib/markdownDirectoryParser';
 
 export const getStaticProps: GetStaticProps = async () => {
   const contentStructure = getContentStructure();
@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 interface ContentStructureItem {
   chapter: string;
-  examples: string[];
+  sections: string[];
 }
 
 interface RPGProps {
@@ -44,7 +44,12 @@ const RPG: React.FC<RPGProps> = ({ contentStructure }) => {
           />
         </div>
         <div className={styles.secondColumn}>
-          {selectedPath && <MarkdownRenderer path={selectedPath} onContentChange={setContent} />}
+          {selectedPath && (
+            <MarkdownRenderer
+              path={selectedPath}
+              onContentChange={setContent}
+            />
+          )}
         </div>
         <div className={styles.thirdColumn}>
           <TableOfContents content={content} />
