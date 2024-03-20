@@ -6,10 +6,10 @@ import styles from '../../styles/markdown.module.scss';
 
 interface MarkdownRendererProps {
   path: string;
-  onContentChange: (content: string) => void;
+  onMarkdownChange: (content: string) => void;
 }
 
-const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ path, onContentChange }) => {
+const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ path, onMarkdownChange }) => {
   const [content, setContent] = useState('');
 
   useEffect(() => {
@@ -17,10 +17,10 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ path, onContentChan
       .then(response => response.text())
       .then(text => {
         setContent(text);
-        onContentChange(text);
+        onMarkdownChange(text);
       })
-      .catch(error => console.error('Failed to load markdown content:', error));
-  }, [path, onContentChange]);
+      .catch(error => console.error('Failed to load markdown:', error));
+  }, [path, onMarkdownChange]);
 
   return (
     <div className={styles.markdown}>

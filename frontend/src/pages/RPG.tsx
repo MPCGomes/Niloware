@@ -5,30 +5,30 @@ import Sidebar from '../components/Sidebar';
 import MarkdownRenderer from '../components/MarkdownRenderer/intex';
 import TableOfContents from '../components/TableOfContents/TableOfContents';
 import styles from '../styles/rpg.module.scss';
-import { getContentStructure } from '../lib/markdownDirectoryParser';
+import { parseMarkdownDirectory } from '../lib/markdownDirectoryParser';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const contentStructure = getContentStructure();
+  const markdownStructure = parseMarkdownDirectory();
   return {
     props: {
-      contentStructure,
+      markdownStructure,
     },
     revalidate: 3600,
   };
 };
 
-interface ContentStructureItem {
+interface MarkdownStructureItem {
   chapter: string;
   sections: string[];
 }
 
 interface RPGProps {
-  contentStructure: ContentStructureItem[];
+  markdownStructure: MarkdownStructureItem[];
 }
 
-const RPG: React.FC<RPGProps> = ({ contentStructure }) => {
+const RPG: React.FC<RPGProps> = ({ markdownStructure }) => {
   const [selectedPath, setSelectedPath] = useState('');
-  const [content, setContent] = useState('');
+  const [markdown, setMarkdown] = useState('');
 
   const handleSelect = (path: string) => {
     setSelectedPath(path);
@@ -39,7 +39,7 @@ const RPG: React.FC<RPGProps> = ({ contentStructure }) => {
       <div className={styles.mainContainer}>
         <div className={styles.firstColumn}>
           <Sidebar
-            contentStructure={contentStructure}
+            markdownStructure={markdownStructure}
             onSelect={handleSelect}
           />
         </div>
@@ -47,12 +47,12 @@ const RPG: React.FC<RPGProps> = ({ contentStructure }) => {
           {selectedPath && (
             <MarkdownRenderer
               path={selectedPath}
-              onContentChange={setContent}
+              onMarkdownChange={setMarkdown}
             />
           )}
         </div>
         <div className={styles.thirdColumn}>
-          <TableOfContents content={content} />
+          <TableOfContents markdown={markdown} />
         </div>
       </div>
     </MainLayout>

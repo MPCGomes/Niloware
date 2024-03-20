@@ -9,11 +9,11 @@ interface ContentStructureItem {
 }
 
 interface SidebarProps {
-  contentStructure: ContentStructureItem[];
+  markdownStructure: ContentStructureItem[];
   onSelect: (path: string) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ contentStructure, onSelect }) => {
+const Sidebar: React.FC<SidebarProps> = ({ markdownStructure, onSelect }) => {
   const [expandedChapters, setExpandedChapters] = useState<string[]>([]);
   const router = useRouter();
 
@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ contentStructure, onSelect }) => {
 
   return (
     <div>
-      {contentStructure.map(({ chapter, sections }) => (
+      {markdownStructure.map(({ chapter, sections }) => (
         <div key={chapter}>
           <div
             onClick={() => toggleChapter(chapter)}
