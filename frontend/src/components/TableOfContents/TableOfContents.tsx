@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
 
 interface TableOfContentsProps {
-  content: string;
+  markdown: string;
 }
 
-const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
+interface Heading {
+  id: string;
+  text: string;
+}
+
+const extractedHeadings = (markdown: string): Heading[] => {
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = markdown;
+  return Array.from(tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(heading => ({
+    id: heading.id,
+    text: heading.textContent || '',
+  }));
+};
+
+const TableOfContents: React.FC<TableOfContentsProps> = ({ markdown }) => {
   const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
 
   useEffect(() => {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = content;
-    const extractedHeadings = Array.from(tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6'))
-      .map(heading => ({
-        id: heading.id,
-        text: heading.textContent || '',
-      }));
-    setHeadings(extractedHeadings);
-  }, [content]);
+    setHeadings(extractedHeadings(markdown));
+  }, [markdown]);
 
   return (
     <div>
