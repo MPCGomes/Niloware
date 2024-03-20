@@ -28,7 +28,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ path, onContentChan
       <ReactMarkdown
         rehypePlugins={[rehypeRaw, rehypeSlug]}
         children={content}
-      />;
+        className={styles.text}
+      />
     </div>
   )
 };

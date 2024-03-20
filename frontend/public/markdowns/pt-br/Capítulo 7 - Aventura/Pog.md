@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <th>bala</th>
+    <th>de</th>
+    <th>goma</th>
+  </tr>
+  <tr>
+    <td>Richard</td>
+    <td>Thomas</td>
+    <td>Turbano</td>
+  </tr>
+  <tr>
+    <td>1234234324</td>
+    <td>123123213</td>
+    <td>123123213</td>
+  </tr>
+</table>

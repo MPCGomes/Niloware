@@ -1,19 +1,14 @@
 .mainButton {
     display: flex;
-    font-size: 17px;
-    font-weight: bolder;
-    padding-block: 5px;
+    padding-block: 4px;
     padding-left: 12px;
     padding-right: 4px;
     cursor: pointer;
-    margin-block: 10px;
-    margin-block: 10px;
-    margin-right: 20px;
-    margin-left: 0;
+    margin-block: 8px;
     border-radius: 6px;
     border: 0;
     transition: transform 0.5s, background-color 0.3s;
-    width: 90%;
+    width: 240px;
     justify-content: space-between;
     align-items: center;
     color: var(--text-color);
@@ -30,9 +25,14 @@
     }
 }
 
+.mainButtonText {
+    font-size: 15px;
+    font-weight: bolder;
+}
+
 .subButton {
     cursor: pointer;
-    font-size: 17px;
+    font-size: 15px;
     margin-left: 30px;
     margin-block: 10px;
     padding-block: 5px;
