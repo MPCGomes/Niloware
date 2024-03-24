@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setSelectedPath } from '../../store/contentSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSelectedPath, setSelectedPath } from '../../store/contentSlice';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 import styles from './styles.module.scss';
+import { loadFromCookies, saveToCookies } from '@/utils/cookieUtils';
+import cn from 'classnames';
 
 interface SidebarProps {
   markdownStructure: {
@@ -12,8 +14,21 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ markdownStructure }) => {
-  const [expandedChapters, setExpandedChapters] = useState<string[]>([]);
   const dispatch = useDispatch();
+  const currentSelectedPath = useSelector(selectSelectedPath);
+  const [expandedChapters, setExpandedChapters] = useState<string[]>([]);
+
+  useEffect(() => {
+    const saved = loadFromCookies('expandedChapters');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setExpandedChapters(parsed);
+    }
+  }, []);
+
+  useEffect(() => {
+    saveToCookies('expandedChapters', JSON.stringify(expandedChapters));
+  }, [expandedChapters]);
 
   const handleSelect = (chapter: string, section: string) => {
     const path = `${chapter}/${section}`;
@@ -55,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ markdownStructure }) => {
                 <div key={section}>
                   <div
                     onClick={() => handleSelect(chapter, section)}
-                    className={styles.subButton}
+                    className={cn(styles.subButton, { [styles.activeSectionButton]: `${chapter}/${section}` === currentSelectedPath })}
                   >
                     {section}
                   </div>

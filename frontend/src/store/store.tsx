@@ -1,17 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import contentReducer from './contentSlice';
+import { saveToCookies, loadFromCookies } from '../utils/cookieUtils';
 
-const loadPreloadedState = (): { content: { selectedPath: string } } => {
-  try {
-    const savedSelectedPath = localStorage.getItem('selectedPath');
-    if (savedSelectedPath === null) {
-      return { content: { selectedPath: '' } };
-    }
-    return { content: { selectedPath: savedSelectedPath } };
-  } catch (error) {
-    console.error('Failed to load state from localStorage:', error);
-    return { content: { selectedPath: '' } };
-  }
+interface ContentState {
+  selectedPath: string;
+}
+
+const loadPreloadedState = (): { content: ContentState } => {
+  const savedSelectedPath = loadFromCookies('selectedPath');
+  return { content: { selectedPath: savedSelectedPath || '' } };
 };
 
 export const store = configureStore({
@@ -25,10 +22,6 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 store.subscribe(() => {
-  try {
-    const state = store.getState();
-    localStorage.setItem('selectedPath', state.content.selectedPath);
-  } catch (error) {
-    console.error('Failed to save state to localStorage:', error);
-  }
+  const selectedPath = store.getState().content.selectedPath;
+  saveToCookies('selectedPath', selectedPath);
 });
