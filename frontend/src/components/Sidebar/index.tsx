@@ -1,36 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { setSelectedPath } from '../../store/contentSlice';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 import styles from './styles.module.scss';
 
-interface ContentStructureItem {
-  chapter: string;
-  sections: string[];
-}
-
 interface SidebarProps {
-  markdownStructure: ContentStructureItem[];
-  onSelect: (path: string) => void;
+  markdownStructure: {
+    chapter: string;
+    sections: string[];
+  }[];
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ markdownStructure, onSelect }) => {
+const Sidebar: React.FC<SidebarProps> = ({ markdownStructure }) => {
   const [expandedChapters, setExpandedChapters] = useState<string[]>([]);
-  const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleSelect = (chapter: string, section: string) => {
-    const sectionPath = `${chapter}/${section}`;
-    onSelect(sectionPath);
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query,
-        selectedPath: sectionPath
-      },
-    }, undefined, { shallow: true });
+    const path = `${chapter}/${section}`;
+    dispatch(setSelectedPath(path));
   };
 
   const toggleChapter = (chapter: string) => {
-    setExpandedChapters(prev => prev.includes(chapter) ? prev.filter(c => c !== chapter) : [...prev, chapter]);
+    setExpandedChapters((prev) =>
+      prev.includes(chapter) ? prev.filter((c) => c !== chapter) : [...prev, chapter]
+    );
   };
 
   return (

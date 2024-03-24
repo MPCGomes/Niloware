@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.0",
+    "@reduxjs/toolkit": "^2.2.2",
     "cors": "^2.8.5",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",

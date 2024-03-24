@@ -6,6 +6,8 @@ import MarkdownRenderer from '../components/MarkdownRenderer/intex';
 import TableOfContents from '../components/TableOfContents/TableOfContents';
 import styles from '../styles/rpg.module.scss';
 import { parseMarkdownDirectory } from '../lib/markdownDirectoryParser';
+import { selectSelectedPath } from '../store/contentSlice';
+import { useSelector } from 'react-redux';
 
 export const getStaticProps: GetStaticProps = async () => {
   const markdownStructure = parseMarkdownDirectory();
@@ -27,29 +29,17 @@ interface RPGProps {
 }
 
 const RPG: React.FC<RPGProps> = ({ markdownStructure }) => {
-  const [selectedPath, setSelectedPath] = useState('');
-  const [markdown, setMarkdown] = useState('');
-
-  const handleSelect = (path: string) => {
-    setSelectedPath(path);
-  };
+  const selectedPath = useSelector(selectSelectedPath);
+  const [markdown, setMarkdown] = React.useState('');
 
   return (
     <MainLayout>
       <div className={styles.mainContainer}>
         <div className={styles.firstColumn}>
-          <Sidebar
-            markdownStructure={markdownStructure}
-            onSelect={handleSelect}
-          />
+          <Sidebar markdownStructure={markdownStructure} />
         </div>
         <div className={styles.secondColumn}>
-          {selectedPath && (
-            <MarkdownRenderer
-              path={selectedPath}
-              onMarkdownChange={setMarkdown}
-            />
-          )}
+            <MarkdownRenderer onMarkdownChange={setMarkdown} />
         </div>
         <div className={styles.thirdColumn}>
           <TableOfContents markdown={markdown} />

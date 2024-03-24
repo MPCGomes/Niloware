@@ -1,6 +1,8 @@
 import { AppProps } from 'next/app';
-import { ThemeProvider, useTheme } from '@/context/ThemeContext';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from '@/context/ThemeContext';
 import '../styles/globals.scss';
+import { store } from '../store/store';
 import { useEffect, useState } from 'react';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -13,9 +15,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </Provider>
   );
 };
 

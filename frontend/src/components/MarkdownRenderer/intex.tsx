@@ -3,33 +3,39 @@ import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import styles from '../../styles/markdown.module.scss';
+import { useSelector } from 'react-redux';
+import { selectSelectedPath } from '../../store/contentSlice';
 
 interface MarkdownRendererProps {
-  path: string;
-  onMarkdownChange: (content: string) => void;
+  onMarkdownChange?: (markdown: string) => void;
 }
 
-const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ path, onMarkdownChange }) => {
-  const [content, setContent] = useState('');
+const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ onMarkdownChange }) => {
+  const selectedPath = useSelector(selectSelectedPath);
+  const [markdown, setMarkdown] = useState('');
 
   useEffect(() => {
-    fetch(`/markdowns/pt-br/${path}.md`)
-      .then(response => response.text())
-      .then(text => {
-        setContent(text);
-        onMarkdownChange(text);
-      })
-      .catch(error => console.error('Failed to load markdown:', error));
-  }, [path, onMarkdownChange]);
+    const fetchMarkdown = async () => {
+      try {
+        const response = await fetch(`/markdowns/pt-br/${selectedPath}.md`);
+        const text = await response.text();
+        setMarkdown(text);
+        onMarkdownChange?.(text);
+      } catch (error) {
+        console.error('Failed to load markdown:', error);
+      }
+    };
+
+    if (selectedPath) {
+      fetchMarkdown();
+    }
+  }, [selectedPath, onMarkdownChange]);
 
   return (
     <div className={styles.markdown}>
-      <ReactMarkdown
-        rehypePlugins={[rehypeRaw, rehypeSlug]}
-        children={content}
-      />
+      <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeSlug]} children={markdown} />
     </div>
-  )
+  );
 };
 
 export default MarkdownRenderer;
