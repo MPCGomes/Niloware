@@ -1,53 +1,48 @@
-import MainLayout from '@/components/layout';
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
-import { getContentStructure } from '../lib/contentReader';
-import Sidebar from '@/components/Sidebar';
-import MarkdownRenderer from '@/components/MarkdownRenderer/intex';
-import styles from '../styles/rpg.module.scss'
-import TableOfContents from '@/components/TableOfContents/TableOfContents';
+import MainLayout from '../components/layout';
+import Sidebar from '../components/Sidebar';
+import MarkdownRenderer from '../components/MarkdownRenderer/intex';
+import TableOfContents from '../components/TableOfContents/TableOfContents';
+import styles from '../styles/rpg.module.scss';
+import { parseMarkdownDirectory } from '../lib/markdownDirectoryParser';
+import { selectSelectedPath } from '../store/contentSlice';
+import { useSelector } from 'react-redux';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const contentStructure = getContentStructure();
+  const markdownStructure = parseMarkdownDirectory();
   return {
     props: {
-      contentStructure,
+      markdownStructure,
     },
     revalidate: 3600,
   };
 };
 
-interface ContentStructureItem {
+interface MarkdownStructureItem {
   chapter: string;
-  examples: string[];
+  sections: string[];
 }
 
 interface RPGProps {
-  contentStructure: ContentStructureItem[];
+  markdownStructure: MarkdownStructureItem[];
 }
 
-const RPG: React.FC<RPGProps> = ({ contentStructure }) => {
-  const [selectedPath, setSelectedPath] = useState('');
-  const [content, setContent] = useState('');
-
-  const handleSelect = (path: string) => {
-    setSelectedPath(path);
-  };
+const RPG: React.FC<RPGProps> = ({ markdownStructure }) => {
+  const selectedPath = useSelector(selectSelectedPath);
+  const [markdown, setMarkdown] = React.useState('');
 
   return (
     <MainLayout>
       <div className={styles.mainContainer}>
         <div className={styles.firstColumn}>
-          <Sidebar
-            contentStructure={contentStructure}
-            onSelect={handleSelect}
-          />
+          <Sidebar markdownStructure={markdownStructure} />
         </div>
         <div className={styles.secondColumn}>
-          {selectedPath && <MarkdownRenderer path={selectedPath} onContentChange={setContent} />}
+            <MarkdownRenderer onMarkdownChange={setMarkdown} />
         </div>
         <div className={styles.thirdColumn}>
-          <TableOfContents content={content} />
+          <TableOfContents markdown={markdown} />
         </div>
       </div>
     </MainLayout>
