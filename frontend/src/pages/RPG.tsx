@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import MainLayout from '../components/layout';
 import Sidebar from '../components/Sidebar';
 import MarkdownRenderer from '../components/MarkdownRenderer/intex';
-import TableOfContents from '../components/TableOfContents/TableOfContents';
+import TableOfContents from '../components/TableOfContents';
 import styles from '../styles/rpg.module.scss';
 import { parseMarkdownDirectory } from '../lib/markdownDirectoryParser';
 import { selectSelectedPath } from '../store/contentSlice';

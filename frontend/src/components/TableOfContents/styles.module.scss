@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding-block: 15px;
+    border-left: 1px solid var(--border);
+    position: fixed;
+    margin-top: 30px;
+}
+
+.buttons {
+    width: fit-content;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    color: var(--text-color);
+    margin-block: 5px;
+    margin-left: 10px;
+    font-family: 'Inter';
+    &:hover {
+        font-weight: bold;
+    }
+}

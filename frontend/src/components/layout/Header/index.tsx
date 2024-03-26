@@ -12,6 +12,7 @@ import RegisterModal from '../../Modal/RegisterModal/Register'
 const Header: React.FC = () => {
 
     return (
+        <>
         <div className={styles.header}>
                 <div className={styles.leftContent}>
                     <Link href='/'>
@@ -37,6 +38,9 @@ const Header: React.FC = () => {
                     <LoginModal/>
                 </div>
             </div>
+
+            <div className={styles.fill}></div>
+        </>
     );
 };
 

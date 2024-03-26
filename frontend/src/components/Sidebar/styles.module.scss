@@ -33,23 +33,26 @@
 .subButton {
     cursor: pointer;
     font-size: 15px;
-    margin-left: 30px;
-    margin-block: 10px;
+    padding-left: 20px;
+    margin-block: 5px;
     padding-block: 5px;
     user-select: none;
+    position: relative;
     &:hover {
         font-weight: bold;
-        transform: scale(1.02);
     }
     &:active {
         font-weight: bold;
-        transform: scale(1)
+        transform: scale(1);
     }
 }
 
 .subButtonsContainer {
     overflow: hidden;
     animation: slideDown 0.3s ease-in;
+    border-left: 1px solid var(--border);
+    margin-left: 13px;
+    position: relative;
 }
 
 @keyframes slideDown {
@@ -73,7 +76,10 @@
   }
 
   .activeSectionButton {
-    color: red;
+    border-left: 2px solid var(--border-darker);
+    &:hover {
+        border-left: 2px solid var(--border-darker);
+    }
   }
 
 

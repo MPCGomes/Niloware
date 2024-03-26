@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from './styles.module.scss'
 
 interface TableOfContentsProps {
   markdown: string;
@@ -26,9 +27,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ markdown }) => {
   }, [markdown]);
 
   return (
-    <div>
+    <div className={styles.container}>
       {headings.map(heading => (
-        <button key={heading.id} onClick={() => document.getElementById(heading.id)?.scrollIntoView()}>
+        <button className={styles.buttons} key={heading.id} onClick={() => document.getElementById(heading.id)?.scrollIntoView()}>
           {heading.text}
         </button>
       ))}

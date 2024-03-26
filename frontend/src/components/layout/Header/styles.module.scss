@@ -1,3 +1,7 @@
+.fill{
+    height: 80px;
+}
+
 .header {
     display: flex;
     justify-content: center;
@@ -5,6 +9,8 @@
     height: 80px;
     background-color: #0F1922;
     width: 100%;
+    position: fixed;
+
 }
 
 .logo {

@@ -53,13 +53,13 @@ const Sidebar: React.FC<SidebarProps> = ({ markdownStructure }) => {
             {expandedChapters.includes(chapter) ? (
               <ChevronDown
                 className={styles.arrow}
-                size={26}
+                size={21}
                 color={'var(--text-color)'}
               />
             ) : (
               <ChevronRight
                 className={styles.arrow}
-                size={26}
+                size={21}
                 color={'var(--text-color)'}
               />
             )}
