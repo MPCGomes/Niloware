@@ -19,4 +19,4 @@ jobs:
         run: |
           cd backend
           chmod +x gradlew
-          ./gradlew test
+          ./gradlew clean build test
