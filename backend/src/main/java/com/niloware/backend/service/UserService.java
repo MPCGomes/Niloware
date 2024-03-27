@@ -6,11 +6,15 @@ import com.niloware.backend.entity.User;
 import com.niloware.backend.repository.RoleRepository;
 import com.niloware.backend.repository.UserRepository;
 import com.niloware.backend.security.SecurityConfig;
+import org.postgresql.util.PSQLException;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -37,17 +41,28 @@ public class UserService {
             throw new IllegalArgumentException("User must be at least 13 years old");
         }
 
-        User user = new User();
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setBirthdate(userDTO.getBirthdate());
-        user.setUsername(userDTO.getUsername());
+        try {
+            User user = new User();
+            user.setEmail(userDTO.getEmail());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            user.setBirthdate(userDTO.getBirthdate());
+            user.setUsername(userDTO.getUsername());
 
-        Role userRole = roleRepository.findByName("USER")
-                .orElseThrow(() -> new RuntimeException("Error: Role USER not found."));
-        user.setRole(userRole);
+            Role userRole = roleRepository.findByName("USER")
+                    .orElseThrow(() -> new RuntimeException("Error: Role USER not found."));
+            user.setRole(userRole);
 
-        return userRepository.save(user);
+            return userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            Throwable rootCause = e.getMostSpecificCause();
+            if (rootCause instanceof PSQLException) {
+                PSQLException psqlEx = (PSQLException) rootCause;
+                if (psqlEx.getSQLState().equals("23505")) {
+                    throw new IllegalStateException("A user with the given details already exists.");
+                }
+            }
+            throw e;
+        }
     }
 
     private boolean isAgeValid(LocalDate birthdate) {
